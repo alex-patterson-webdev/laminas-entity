@@ -11,8 +11,10 @@
   ],
   "require": {
     "php": ">=7.4",
+    "laminas/laminas-component-installer" : "^2",
     "laminas/laminas-servicemanager" : "^3.4.",
     "laminas/laminas-modulemanager" : "^2.8.",
+    "doctrine/doctrine-laminas-hydrator" : "^2",
     "alex-patterson-webdev/doctrine-entity-repository": "dev-feature/0.0.3",
     "alex-patterson-webdev/laminas-factory": "dev-feature/0.2.0"
   },
@@ -46,5 +48,10 @@
     "preferred-install": "dist",
     "optimize-autoloader": true,
     "sort-packages": true
+  },
+  "extra": {
+    "laminas": {
+      "component ": "Arp\\LaminasEntity"
+    }
   }
 }
