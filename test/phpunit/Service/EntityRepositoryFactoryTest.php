@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ArpTest\LaminasEntity\Service;
 
+use Arp\DoctrineEntityRepository\EntityRepositoryInterface;
 use Arp\DoctrineEntityRepository\EntityRepositoryProviderInterface;
 use Arp\Entity\EntityInterface;
 use Arp\LaminasEntity\Service\EntityRepositoryFactory;
@@ -70,7 +71,7 @@ final class EntityRepositoryFactoryTest extends TestCase
         $entityName = EntityInterface::class;
 
         $this->repositoryProvider->expects($this->once())
-            ->method('has')
+            ->method('hasRepository')
             ->with($entityName)
             ->willReturn(false);
 
@@ -93,6 +94,8 @@ final class EntityRepositoryFactoryTest extends TestCase
      * will be used.
      *
      * @covers \Arp\LaminasEntity\Service\EntityRepositoryFactory::getRepository
+     *
+     * @throws \Throwable
      */
     public function testGetRepositoryWillUseRepositoryProviderIfRepositoryIsFound(): void
     {
@@ -104,7 +107,7 @@ final class EntityRepositoryFactoryTest extends TestCase
         $entityManager = $this->getMockForAbstractClass(EntityManagerInterface::class);
 
         $this->repositoryProvider->expects($this->once())
-            ->method('has')
+            ->method('hasRepository')
             ->with($entityName)
             ->willReturn(true);
 
@@ -113,11 +116,11 @@ final class EntityRepositoryFactoryTest extends TestCase
             'entity_manager' => $entityManager,
         ];
 
-        /** @var ObjectRepository|MockObject $repository */
-        $repository = $this->getMockForAbstractClass(ObjectRepository::class);
+        /** @var EntityRepositoryInterface|MockObject $repository */
+        $repository = $this->getMockForAbstractClass(EntityRepositoryInterface::class);
 
         $this->repositoryProvider->expects($this->once())
-            ->method('get')
+            ->method('getRepository')
             ->with($entityName, $options)
             ->willReturn($repository);
 
