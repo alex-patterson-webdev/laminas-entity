@@ -59,7 +59,7 @@ final class EntityRepositoryManagerTest extends TestCase
      * Assert that the call to hasRepository() with a non-existing entity name will result in boolean false
      * being returned.
      *
-     * @covers \Arp\LaminasEntity\Service\EntityRepositoryManager::getRepository
+     * @covers \Arp\LaminasEntity\Service\EntityRepositoryManager::hasRepository
      */
     public function testHasRepositoryWillReturnFalseForNotExistingRepository(): void
     {
@@ -77,9 +77,9 @@ final class EntityRepositoryManagerTest extends TestCase
      * Assert that the call to hasRepository() with a non-existing entity name will result in boolean false
      * being returned.
      *
-     * @covers \Arp\LaminasEntity\Service\EntityRepositoryManager::getRepository
+     * @covers \Arp\LaminasEntity\Service\EntityRepositoryManager::hasRepository
      */
-    public function testGetRepositoryWillReturnTrueFromExistingRepository(): void
+    public function testHasRepositoryWillReturnTrueFromExistingRepository(): void
     {
         /** @var EntityRepositoryInterface|MockObject $repository */
         $repository = $this->getMockForAbstractClass(EntityRepositoryInterface::class);
@@ -88,11 +88,52 @@ final class EntityRepositoryManagerTest extends TestCase
         $config = [
             'services' => [
                 EntityInterface::class => $repository,
-            ]
+            ],
         ];
 
         $manager = new EntityRepositoryManager($this->container, $config);
 
         $this->assertTrue($manager->hasRepository($entityName));
     }
+
+    /**
+     * Assert that calling for a service that is not registered a \Throwable exception error will be raised.
+     *
+     * @covers \Arp\LaminasEntity\Service\EntityRepositoryManager::getRepository
+     * @throws \Throwable
+     */
+    public function testGetRepositoryWillThrowServiceNotFoundExceptionIfNotFound(): void
+    {
+        $entityName = EntityInterface::class;
+        $config = [
+            'services' => [],
+        ];
+
+        $manager = new EntityRepositoryManager($this->container, $config);
+
+        $this->expectException(\Throwable::class);
+
+        $manager->getRepository($entityName);
+    }
+
+    /**
+     * @covers \Arp\LaminasEntity\Service\EntityRepositoryManager::getRepository
+     * @throws \Throwable
+     */
+    public function testGetRepositoryWillReturnRepository(): void
+    {
+        /** @var EntityRepositoryInterface|MockObject $repository */
+        $repository = $this->getMockForAbstractClass(EntityRepositoryInterface::class);
+        $entityName = EntityInterface::class;
+        $config = [
+            'services' => [
+                $entityName => $repository,
+            ],
+        ];
+
+        $manager = new EntityRepositoryManager($this->container, $config);
+
+        $this->assertSame($repository, $manager->getRepository($entityName));
+    }
+
 }

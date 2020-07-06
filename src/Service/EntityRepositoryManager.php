@@ -6,7 +6,6 @@ namespace Arp\LaminasEntity\Service;
 
 use Arp\DoctrineEntityRepository\EntityRepositoryInterface;
 use Arp\DoctrineEntityRepository\EntityRepositoryProviderInterface;
-use Arp\DoctrineEntityRepository\Exception\EntityRepositoryNotFoundException;
 use Laminas\ServiceManager\AbstractPluginManager;
 
 /**
@@ -38,18 +37,10 @@ final class EntityRepositoryManager extends AbstractPluginManager implements Ent
      *
      * @return EntityRepositoryInterface
      *
-     * @throws EntityRepositoryNotFoundException
+     * @throws \Throwable
      */
     public function getRepository(string $entityName, array $options = []): EntityRepositoryInterface
     {
-        try {
-            return $this->get($entityName, $options);
-        } catch (\Throwable $e) {
-            throw new EntityRepositoryNotFoundException(
-                sprintf('Failed to provide entity repository \'%s\': %s', $entityName, $e->getMessage()),
-                $e->getCode(),
-                $e
-            );
-        }
+        return $this->get($entityName, $options);
     }
 }
