@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e05430adfe4dac8ea8c0405c915203c",
+    "content-hash": "efddf4cda4cceff5f65643c47f87daad",
     "packages": [
         {
             "name": "alex-patterson-webdev/date-time",
@@ -51,7 +51,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/alexp/www/git/alex-patterson-webdev/doctrine-entity-repository.git",
-                "reference": "b56f186d26fa5c60a7f1765b9f51b99912a496f8"
+                "reference": "ef6079db9cff65355304c495a8049f556f3524c1"
             },
             "require": {
                 "alex-patterson-webdev/date-time": "dev-feature/0.2.0",
@@ -90,7 +90,7 @@
                     "email": "alex.patterson.webdev@gmail.com"
                 }
             ],
-            "time": "2020-06-27T12:07:07+00:00"
+            "time": "2020-07-03T10:23:58+00:00"
         },
         {
             "name": "alex-patterson-webdev/entity",
@@ -205,16 +205,16 @@
         },
         {
             "name": "alex-patterson-webdev/laminas-factory",
-            "version": "dev-feature/0.2.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alex-patterson-webdev/laminas-factory.git",
-                "reference": "a1859666647d19d62e84184f2e1b507af2114257"
+                "reference": "dfb5007b98c079cd3a61be76897dd0ebf2538841"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alex-patterson-webdev/laminas-factory/zipball/a1859666647d19d62e84184f2e1b507af2114257",
-                "reference": "a1859666647d19d62e84184f2e1b507af2114257",
+                "url": "https://api.github.com/repos/alex-patterson-webdev/laminas-factory/zipball/dfb5007b98c079cd3a61be76897dd0ebf2538841",
+                "reference": "dfb5007b98c079cd3a61be76897dd0ebf2538841",
                 "shasum": ""
             },
             "require": {
@@ -222,8 +222,10 @@
                 "php": ">=7.4"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpmd/phpmd": "@stable",
                 "phpunit/phpunit": "^9.1",
-                "squizlabs/php_codesniffer": "^3.5"
+                "squizlabs/php_codesniffer": "3.*"
             },
             "type": "library",
             "autoload": {
@@ -232,7 +234,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2020-06-23T09:24:10+00:00"
+            "time": "2020-07-06T23:45:51+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -1340,28 +1342,28 @@
         },
         {
             "name": "laminas/laminas-component-installer",
-            "version": "2.1.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-component-installer.git",
-                "reference": "a12c65077c6b046d8f4338f9a2479e783e97aaab"
+                "reference": "5f99cfa211042ee6f19ab9cc2e7af4a1fe8f5b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-component-installer/zipball/a12c65077c6b046d8f4338f9a2479e783e97aaab",
-                "reference": "a12c65077c6b046d8f4338f9a2479e783e97aaab",
+                "url": "https://api.github.com/repos/laminas/laminas-component-installer/zipball/5f99cfa211042ee6f19ab9cc2e7af4a1fe8f5b35",
+                "reference": "5f99cfa211042ee6f19ab9cc2e7af4a1fe8f5b35",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0",
+                "composer-plugin-api": "^1.0 || ^2.0",
                 "laminas/laminas-zendframework-bridge": "^1.0",
                 "php": "^7.1"
             },
             "replace": {
-                "zendframework/zend-component-installer": "self.version"
+                "zendframework/zend-component-installer": "^2.1.2"
             },
             "require-dev": {
-                "composer/composer": "^1.5.2",
+                "composer/composer": "^1.5.2 || ~2.0.0.0@dev || ^2.0",
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "malukenho/docheader": "^0.1.6",
                 "mikey179/vfsstream": "^1.6.7",
@@ -1370,8 +1372,8 @@
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev",
-                    "dev-develop": "2.2.x-dev"
+                    "dev-master": "2.2.x-dev",
+                    "dev-develop": "2.3.x-dev"
                 },
                 "class": "Laminas\\ComponentInstaller\\ComponentInstaller"
             },
@@ -1392,7 +1394,13 @@
                 "laminas",
                 "plugin"
             ],
-            "time": "2019-12-31T16:28:51+00:00"
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-07-01T20:13:08+00:00"
         },
         {
             "name": "laminas/laminas-config",
@@ -2426,16 +2434,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "66a8f0957a3ca54e4f724e49028ab19d75a8918b"
+                "reference": "58c7475e5457c5492c26cc740cc0ad7464be9442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/66a8f0957a3ca54e4f724e49028ab19d75a8918b",
-                "reference": "66a8f0957a3ca54e4f724e49028ab19d75a8918b",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/58c7475e5457c5492c26cc740cc0ad7464be9442",
+                "reference": "58c7475e5457c5492c26cc740cc0ad7464be9442",
                 "shasum": ""
             },
             "require": {
@@ -2449,6 +2457,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.1-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -2480,7 +2492,21 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2020-05-20T17:43:50+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-07-06T13:23:11+00:00"
         },
         {
             "name": "symfony/string",
@@ -2759,16 +2785,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.10.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "5796d127b0c4ff505b77455148ea9d5269d99758"
+                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/5796d127b0c4ff505b77455148ea9d5269d99758",
-                "reference": "5796d127b0c4ff505b77455148ea9d5269d99758",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
+                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
                 "shasum": ""
             },
             "require": {
@@ -2809,7 +2835,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-28T07:02:41+00:00"
+            "time": "2020-06-29T13:22:24+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3943,20 +3969,20 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "3e523c576f29dacecff309f35e4cc5a5c168e78a"
+                "reference": "1e90b4cf905a7d06c420b1d2e9d11a4dc8a13113"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/3e523c576f29dacecff309f35e4cc5a5c168e78a",
-                "reference": "3e523c576f29dacecff309f35e4cc5a5c168e78a",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/1e90b4cf905a7d06c420b1d2e9d11a4dc8a13113",
+                "reference": "1e90b4cf905a7d06c420b1d2e9d11a4dc8a13113",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0",
@@ -3995,7 +4021,13 @@
                 "unidiff",
                 "unified diff"
             ],
-            "time": "2020-05-08T05:01:12+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-06-30T04:46:02+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -4399,16 +4431,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "2.1.1",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "56b3ba194e0cbaaf3de7ccd353c289d7a84ed022"
+                "reference": "86991e2b33446cd96e648c18bcdb1e95afb2c05a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/56b3ba194e0cbaaf3de7ccd353c289d7a84ed022",
-                "reference": "56b3ba194e0cbaaf3de7ccd353c289d7a84ed022",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/86991e2b33446cd96e648c18bcdb1e95afb2c05a",
+                "reference": "86991e2b33446cd96e648c18bcdb1e95afb2c05a",
                 "shasum": ""
             },
             "require": {
@@ -4420,7 +4452,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -4447,7 +4479,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-26T12:17:54+00:00"
+            "time": "2020-07-05T08:31:53+00:00"
         },
         {
             "name": "sebastian/version",
@@ -4692,16 +4724,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "dd99cb3a0aff6cadd2a8d7d7ed72c2161e218337"
+                "reference": "5e20b83385a77593259c9f8beb2c43cd03b2ac14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/dd99cb3a0aff6cadd2a8d7d7ed72c2161e218337",
-                "reference": "dd99cb3a0aff6cadd2a8d7d7ed72c2161e218337",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/5e20b83385a77593259c9f8beb2c43cd03b2ac14",
+                "reference": "5e20b83385a77593259c9f8beb2c43cd03b2ac14",
                 "shasum": ""
             },
             "require": {
@@ -4711,6 +4743,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.1-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -4734,7 +4770,21 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
-            "time": "2020-05-27T08:34:37+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-06-06T08:49:21+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -4810,16 +4860,16 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "405952c4e90941a17e52ef7489a2bd94870bb290"
+                "reference": "f6f613d74cfc5a623fc36294d3451eb7fa5a042b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/405952c4e90941a17e52ef7489a2bd94870bb290",
-                "reference": "405952c4e90941a17e52ef7489a2bd94870bb290",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/f6f613d74cfc5a623fc36294d3451eb7fa5a042b",
+                "reference": "f6f613d74cfc5a623fc36294d3451eb7fa5a042b",
                 "shasum": ""
             },
             "require": {
@@ -4833,6 +4883,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.1-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -4864,7 +4918,21 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2020-05-20T17:43:50+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-07-06T13:23:11+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -5333,7 +5401,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "alex-patterson-webdev/doctrine-entity-repository": 20,
-        "alex-patterson-webdev/laminas-factory": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": true,
