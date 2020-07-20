@@ -1,15 +1,15 @@
-[![Build Status](https://travis-ci.com/alex-patterson-webdev/doctrine-entity-repository.svg?branch=master)](https://travis-ci.com/alex-patterson-webdev/doctrine-entity-repository)
-[![codecov](https://codecov.io/gh/alex-patterson-webdev/doctrine-entity-repository/branch/master/graph/badge.svg)](https://codecov.io/gh/alex-patterson-webdev/doctrine-entity-repository)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alex-patterson-webdev/doctrine-entity-repository/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alex-patterson-webdev/doctrine-entity-repository/?branch=master)
+[![Build Status](https://travis-ci.com/alex-patterson-webdev/laminas-entity.svg?branch=master)](https://travis-ci.com/alex-patterson-webdev/laminas-entity)
+[![codecov](https://codecov.io/gh/alex-patterson-webdev/laminas-entity/branch/master/graph/badge.svg)](https://codecov.io/gh/alex-patterson-webdev/laminas-entity)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alex-patterson-webdev/laminas-entity/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alex-patterson-webdev/laminas-entity/?branch=master)
 
-# Arp\DoctrineEntityRepository
+# Arp\LaminasEntity
 
 ## About
 
-A Doctrine ORM entity repository implementation.
+Provides integration of the [alex-patterson-webdev/doctrine-entity-repository](https://github.com/alex-patterson-webdev/doctrine-entity-repository) with the Laminas Framework.
 
 ## Installation
 
 Installation via [composer](https://getcomposer.org).
 
-    require alex-patterson-webdev/doctrine-entity-repository ^1
+    require alex-patterson-webdev/laminas-entity ^1
