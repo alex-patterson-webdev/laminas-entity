@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "508eac36b4b604b6892139203bc5d6bb",
+    "content-hash": "be541ac406e7e914017f4d2a4dad09f3",
     "packages": [
         {
             "name": "alex-patterson-webdev/date-time",
