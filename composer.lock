@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be541ac406e7e914017f4d2a4dad09f3",
+    "content-hash": "31169072f2a14b9bac7abf3fca83f267",
     "packages": [
         {
             "name": "alex-patterson-webdev/date-time",
@@ -53,8 +53,14 @@
             "version": "0.1.0",
             "source": {
                 "type": "git",
-                "url": "/home/alexp/www/git/alex-patterson-webdev/doctrine-entity-repository.git",
+                "url": "https://github.com/alex-patterson-webdev/doctrine-entity-repository.git",
                 "reference": "c44aff84b7ef9a4cb3b806d305d775fa1355be00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alex-patterson-webdev/doctrine-entity-repository/zipball/c44aff84b7ef9a4cb3b806d305d775fa1355be00",
+                "reference": "c44aff84b7ef9a4cb3b806d305d775fa1355be00",
+                "shasum": ""
             },
             "require": {
                 "alex-patterson-webdev/date-time": "^1",
@@ -100,8 +106,14 @@
             "version": "0.1.1",
             "source": {
                 "type": "git",
-                "url": "/home/alexp/www/git/alex-patterson-webdev/entity.git",
+                "url": "https://github.com/alex-patterson-webdev/entity.git",
                 "reference": "0ebcae099504f0aa44085c4dcd543253796af27c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alex-patterson-webdev/entity/zipball/0ebcae099504f0aa44085c4dcd543253796af27c",
+                "reference": "0ebcae099504f0aa44085c4dcd543253796af27c",
+                "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
@@ -184,8 +196,14 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "/home/alexp/www/git/alex-patterson-webdev/factory.git",
+                "url": "https://github.com/alex-patterson-webdev/factory.git",
                 "reference": "59815fc82ffe88e91e3ad45c93b6b3e0af9df1c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alex-patterson-webdev/factory/zipball/59815fc82ffe88e91e3ad45c93b6b3e0af9df1c0",
+                "reference": "59815fc82ffe88e91e3ad45c93b6b3e0af9df1c0",
+                "shasum": ""
             },
             "require": {
                 "php": "^7.2"
