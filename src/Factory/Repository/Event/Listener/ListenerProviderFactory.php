@@ -11,6 +11,7 @@ use Arp\EventDispatcher\Listener\ListenerProvider;
 use Arp\EventDispatcher\Resolver\EventNameResolver;
 use Arp\LaminasFactory\AbstractFactory;
 use Arp\LaminasFactory\Exception\ServiceNotCreatedException;
+use Arp\LaminasFactory\Exception\ServiceNotFoundException;
 use Interop\Container\ContainerInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
@@ -23,17 +24,17 @@ class ListenerProviderFactory extends AbstractFactory
     /**
      * @var string
      */
-    private $defaultClassName = ListenerProvider::class;
+    private string $defaultClassName = ListenerProvider::class;
 
     /**
      * @var array
      */
-    protected $defaultListenerConfig = [];
+    protected array $defaultListenerConfig = [];
 
     /**
      * @var array
      */
-    protected $defaultAggregateListenerConfig = [];
+    protected array $defaultAggregateListenerConfig = [];
 
     /**
      * @param ContainerInterface $container
@@ -52,7 +53,7 @@ class ListenerProviderFactory extends AbstractFactory
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 
         $className = $options['class_name'] ?? $this->defaultClassName;
-        if (!is_a($className, ListenerProviderInterface::class, true)) {
+        if (! is_a($className, ListenerProviderInterface::class, true)) {
             throw new ServiceNotCreatedException(
                 sprintf(
                     'The \'class_name\' option must be a class of type \'%s\'; \'%s\' provided in \'%s\'',
@@ -72,63 +73,31 @@ class ListenerProviderFactory extends AbstractFactory
         $listenerProvider = new $className($eventNameResolver);
 
         if ($listenerProvider instanceof AddListenerAwareInterface) {
-            $this->registerEventListeners(
-                $container,
-                $listenerProvider,
-                array_replace_recursive($this->defaultListenerConfig, $options['listeners'] ?? []),
-                array_replace_recursive($this->defaultAggregateListenerConfig, $options['aggregate_listeners'] ?? []),
-                $requestedName
-            );
+            try {
+                $listenerConfig = array_replace_recursive($this->defaultListenerConfig, $options['listeners'] ?? []);
+
+                if (! empty($listenerConfig)) {
+                    $this->registerCallableListeners($container, $listenerProvider, $listenerConfig, $requestedName);
+                }
+
+                $listenerConfig = array_replace_recursive(
+                    $this->defaultAggregateListenerConfig,
+                    $options['aggregate_listeners'] ?? []
+                );
+
+                if (! empty($listenerConfig)) {
+                    $this->registerAggregateListeners($container, $listenerProvider, $listenerConfig, $requestedName);
+                }
+            } catch (EventListenerException $e) {
+                throw new ServiceNotCreatedException(
+                    sprintf('Failed to register event listeners: %s', $e->getMessage()),
+                    $e->getCode(),
+                    $e
+                );
+            }
         }
 
         return $listenerProvider;
-    }
-
-    /**
-     * Register a collection of event listeners with the provided $listenerProvider using $eventListenerConfig.
-     *
-     * @param ContainerInterface        $container
-     * @param AddListenerAwareInterface $listenerProvider
-     * @param array                     $listenerConfig
-     * @param array                     $aggregateListenerConfig
-     * @param string                    $requestedName
-     *
-     * @throws ServiceNotCreatedException
-     */
-    protected function registerEventListeners(
-        ContainerInterface $container,
-        AddListenerAwareInterface $listenerProvider,
-        array $listenerConfig,
-        array $aggregateListenerConfig,
-        string $requestedName
-    ): void {
-        try {
-            if (! empty($listenerConfig)) {
-                $this->registerCallableListeners(
-                    $container,
-                    $listenerProvider,
-                    $listenerConfig,
-                    $requestedName
-                );
-            }
-
-            if (! empty($aggregateListenerConfig)) {
-                $this->registerAggregateListeners(
-                    $container,
-                    $listenerProvider,
-                    $aggregateListenerConfig,
-                    $requestedName
-                );
-            }
-        } catch (ServiceNotCreatedException $e) {
-            throw $e;
-        } catch (\Throwable $e) {
-            throw new ServiceNotCreatedException(
-                sprintf('Failed to register event listeners: %s', $e->getMessage()),
-                $e->getCode(),
-                $e
-            );
-        }
     }
 
     /**
@@ -152,6 +121,7 @@ class ListenerProviderFactory extends AbstractFactory
                     if (is_string($eventListener)) {
                         $eventListener = $this->getService($container, $eventListener, $requestedName);
                     }
+
                     if (!is_callable($eventListener)) {
                         throw new ServiceNotCreatedException(
                             sprintf(
@@ -173,19 +143,23 @@ class ListenerProviderFactory extends AbstractFactory
     /**
      * @param ContainerInterface        $container
      * @param AddListenerAwareInterface $listenerProvider
-     * @param array                     $aggregateListenerConfig
+     * @param array                     $listenerConfig
      * @param string                    $requestedName
+     *
+     * @throws ServiceNotCreatedException
+     * @throws ServiceNotFoundException
      */
     public function registerAggregateListeners(
         ContainerInterface $container,
         AddListenerAwareInterface $listenerProvider,
-        $aggregateListenerConfig,
+        array $listenerConfig,
         string $requestedName
     ): void {
-        foreach ($aggregateListenerConfig as $index => $aggregateListener) {
+        foreach ($listenerConfig as $aggregateListener) {
             if (is_string($aggregateListener)) {
                 $aggregateListener = $this->getService($container, $aggregateListener, $requestedName);
             }
+
             if (!$aggregateListener instanceof AggregateListenerInterface) {
                 throw new ServiceNotCreatedException(
                     sprintf(

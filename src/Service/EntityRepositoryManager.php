@@ -24,14 +24,23 @@ final class EntityRepositoryManager extends AbstractPluginManager implements Ent
     /**
      * @param string $entityName
      *
-     * @return EntityRepositoryInterface|null
+     * @return bool
      */
-    public function getEntityRepository(string $entityName): ?EntityRepositoryInterface
+    public function hasRepository(string $entityName): bool
     {
-        try {
-            return $this->get($entityName);
-        } catch (\Throwable $e) {
-            return null;
-        }
+        return $this->has($entityName);
+    }
+
+    /**
+     * @param string $entityName
+     * @param array  $options
+     *
+     * @return EntityRepositoryInterface
+     *
+     * @throws \Throwable
+     */
+    public function getRepository(string $entityName, array $options = []): EntityRepositoryInterface
+    {
+        return $this->get($entityName, $options);
     }
 }

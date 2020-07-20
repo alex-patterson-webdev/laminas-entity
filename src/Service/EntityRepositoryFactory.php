@@ -45,16 +45,18 @@ class EntityRepositoryFactory implements RepositoryFactory
      * @param string                 $entityName
      *
      * @return EntityRepositoryInterface|ObjectRepository
+     *
+     * @throws \Throwable
      */
     public function getRepository(EntityManagerInterface $entityManager, $entityName): ObjectRepository
     {
-        if ($this->repositoryProvider->has($entityName)) {
+        if ($this->repositoryProvider->hasRepository($entityName)) {
             $options = [
                 'entity_name'    => $entityName,
                 'entity_manager' => $entityManager,
             ];
 
-            return $this->repositoryProvider->get($entityName, $options);
+            return $this->repositoryProvider->getRepository($entityName, $options);
         }
 
         return $this->repositoryFactory->getRepository($entityManager, $entityName);
