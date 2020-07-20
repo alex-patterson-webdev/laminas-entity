@@ -36,18 +36,18 @@ final class CascadeSaveServiceFactory extends AbstractFactory
             $logger = $this->getService($container, $logger, $requestedName);
         }
 
-        $defaultSaveOptions = [
-            EntityEventOption::TRANSACTION_MODE => TransactionMode::DISABLED,
-            EntityEventOption::FLUSH_MODE => TransactionMode::DISABLED,
-            EntityEventOption::CLEAR_MODE => ClearMode::DISABLED,
-        ];
-
-        $defaultCollectionSaveOptions = [
-            EntityEventOption::TRANSACTION_MODE => TransactionMode::DISABLED,
-            EntityEventOption::FLUSH_MODE => TransactionMode::DISABLED,
-            EntityEventOption::CLEAR_MODE => ClearMode::DISABLED,
-        ];
-
-        return new CascadeSaveService($logger, $defaultSaveOptions, $defaultCollectionSaveOptions);
+        return new CascadeSaveService(
+            $logger,
+            [
+                EntityEventOption::TRANSACTION_MODE => TransactionMode::DISABLED,
+                EntityEventOption::FLUSH_MODE => TransactionMode::DISABLED,
+                EntityEventOption::CLEAR_MODE => ClearMode::DISABLED,
+            ],
+            [
+                EntityEventOption::TRANSACTION_MODE => TransactionMode::DISABLED,
+                EntityEventOption::FLUSH_MODE => TransactionMode::DISABLED,
+                EntityEventOption::CLEAR_MODE => ClearMode::DISABLED,
+            ]
+        );
     }
 }

@@ -6,9 +6,9 @@ namespace Arp\LaminasEntity\Factory\Repository\Query;
 
 use Arp\DoctrineEntityRepository\Query\QueryService;
 use Arp\DoctrineEntityRepository\Query\QueryServiceInterface;
-use Arp\Entity\Service\EntityManagerInterface;
 use Arp\LaminasFactory\AbstractFactory;
 use Arp\LaminasFactory\Exception\ServiceNotCreatedException;
+use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
 use Psr\Log\NullLogger;
 

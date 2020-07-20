@@ -8,6 +8,7 @@ use Arp\LaminasEntity\Hydrator\EntityHydrator;
 use Arp\LaminasFactory\AbstractFactory;
 use Arp\LaminasFactory\Exception\ServiceNotCreatedException;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyEnabledInterface;
 use Laminas\Hydrator\Strategy\StrategyEnabledInterface;
@@ -21,7 +22,7 @@ class EntityHydratorFactory extends AbstractFactory
     /**
      * @var string
      */
-    private $defaultClassName = EntityHydrator::class;
+    private string $defaultClassName = EntityHydrator::class;
 
     /**
      * @param ContainerInterface $container
@@ -37,26 +38,14 @@ class EntityHydratorFactory extends AbstractFactory
         $options = $options ?? $this->getServiceOptions($container, $requestedName, 'hydrators');
 
         $className = $options['class_name'] ?? $this->defaultClassName;
-        $byValue   = $options['by_value'] ?? false;
+        $byValue = $options['by_value'] ?? false;
 
-        $entityManager = $options['entity_manager'] ?? EntityManager::class;
-        if (null === $entityManager) {
-            throw new ServiceNotCreatedException(
-                sprintf(
-                    'The required \'entity_manager\' configuration option is missing for service \'%s\'',
-                    $requestedName
-                )
-            );
-        }
-
-        /** @var EntityManager|string $entityManager */
-        $entityManager = $this->getService($container, $entityManager, $requestedName);
+        $entityManager = $this->getEntityManager($container, $requestedName, $options);
 
         /** @var EntityHydrator $hydrator */
         $hydrator = new $className($entityManager, $byValue);
 
         $namingStrategy = $options['naming_strategy'] ?? null;
-
         if (null !== $namingStrategy && $hydrator instanceof NamingStrategyEnabledInterface) {
             if (is_string($namingStrategy)) {
                 $namingStrategy = $this->getService($container, $namingStrategy, $requestedName);
@@ -65,7 +54,6 @@ class EntityHydratorFactory extends AbstractFactory
         }
 
         $strategies = $options['strategies'] ?? [];
-
         if (! empty($strategies) && $hydrator instanceof StrategyEnabledInterface) {
             foreach ($strategies as $name => $strategy) {
                 if (is_string($strategy)) {
@@ -76,5 +64,33 @@ class EntityHydratorFactory extends AbstractFactory
         }
 
         return $hydrator;
+    }
+
+    /**
+     * Return the entity manager provided in configuration options.
+     *
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array              $options
+     *
+     * @return EntityManagerInterface
+     */
+    private function getEntityManager(
+        ContainerInterface $container,
+        string $requestedName,
+        array $options
+    ): EntityManagerInterface {
+        $entityManager = $options['entity_manager'] ?? EntityManager::class;
+
+        if (null === $entityManager) {
+            throw new ServiceNotCreatedException(
+                sprintf(
+                    'The required \'entity_manager\' configuration option is missing for service \'%s\'',
+                    $requestedName
+                )
+            );
+        }
+
+        return $this->getService($container, $entityManager, $requestedName);
     }
 }

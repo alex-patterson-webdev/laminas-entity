@@ -28,13 +28,9 @@ final class EntityRepositoryFactoryFactory extends AbstractFactory
         $requestedName,
         array $options = null
     ): EntityRepositoryFactory {
-        /** @var EntityRepositoryManager $entityRepositoryManager */
-        $entityRepositoryManager = $this->getService(
-            $container,
-            EntityRepositoryManager::class,
-            $requestedName
-        );
+        /** @var EntityRepositoryManager $repositoryManager */
+        $repositoryManager = $this->getService($container, EntityRepositoryManager::class, $requestedName);
 
-        return new EntityRepositoryFactory($entityRepositoryManager, new DefaultRepositoryFactory());
+        return new EntityRepositoryFactory($repositoryManager, new DefaultRepositoryFactory());
     }
 }

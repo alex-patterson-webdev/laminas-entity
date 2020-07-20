@@ -25,7 +25,7 @@ final class EntityRepositoryFactory extends AbstractFactory
     /**
      * @var string
      */
-    private $defaultClassName = EntityRepository::class;
+    private string $defaultClassName = EntityRepository::class;
 
     /**
      * @param ContainerInterface $container
@@ -40,10 +40,10 @@ final class EntityRepositoryFactory extends AbstractFactory
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName, 'entity_repositories');
 
-        $className  = $options['class_name'] ?? null;
+        $className = $options['class_name'] ?? null;
         $entityName = $options['entity_name'] ?? $requestedName;
 
-        if (!is_a($entityName, EntityInterface::class, true)) {
+        if (! is_a($entityName, EntityInterface::class, true)) {
             throw new ServiceNotCreatedException(
                 sprintf(
                     'The \'entity_name\' configuration option must reference a class ' .
@@ -57,13 +57,10 @@ final class EntityRepositoryFactory extends AbstractFactory
 
         // Attempt to automatically find a value custom repository or otherwise fallback to the default.
         if (null === $className) {
+            $customClassName = $this->generateCustomClassName($entityName);
             $className = $this->defaultClassName;
 
-            $parts  = explode('\\', $entityName);
-            $entity = array_pop($parts);
-            $customClassName = sprintf('%s\\Repository\\%sRepository', implode('\\', $parts), $entity);
-
-            if (class_exists($customClassName)) {
+            if (null !== $customClassName && class_exists($customClassName)) {
                 $className = $customClassName;
             }
         }
@@ -91,5 +88,23 @@ final class EntityRepositoryFactory extends AbstractFactory
         $logger = $this->getService($container, $options['logger'] ?? NullLogger::class, $requestedName);
 
         return new $className($entityName, $queryService, $persistService, $logger);
+    }
+
+    /**
+     * @todo Current logic needs rethink; reflection?
+     *
+     * @param string $entityName
+     *
+     * @return string
+     */
+    private function generateCustomClassName(string $entityName): string
+    {
+        //$reflectionClass = new \ReflectionClass($entityName);
+        //$reflectionClass->getShortName();
+
+        $parts = explode('\\', $entityName);
+        $entity = array_pop($parts);
+
+        return sprintf('%s\\Repository\\%sRepository', implode('\\', $parts), $entity);
     }
 }

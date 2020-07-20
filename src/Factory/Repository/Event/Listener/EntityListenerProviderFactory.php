@@ -25,7 +25,7 @@ class EntityListenerProviderFactory extends ListenerProviderFactory
     /**
      * @var array
      */
-    protected $defaultAggregateListenerConfig = [
+    protected array $defaultAggregateListenerConfig = [
         EntityValidationListener::class,
         TransactionListener::class,
         ErrorListener::class,
@@ -35,7 +35,7 @@ class EntityListenerProviderFactory extends ListenerProviderFactory
     /**
      * @var array
      */
-    protected $defaultListenerConfig = [
+    protected array $defaultListenerConfig = [
         EntityEventName::CREATE => [
             1  => [
                 CascadeSaveListener::class,
